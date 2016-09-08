@@ -3,10 +3,10 @@
 <project name="sourcerer-aqe" default="maven-deploy">
 
 	<!-- Propriedades -->
-	<property name="version" value="1.0.3" />
+	<property name="version" value="1.0.4" />
 	<property name="bin" location="../bin" />
 	<property name="dist" location="../dist" />
-	<property name="maven-repo" location="C:/Users/ac/.m2/repository" />
+	<property name="maven-repo" location="C:/Users/\adrianocarv/.m2/repository" />
 	<property name="maven-jar-path" value="br/unifesp/ppgcc/sourcerer-aqe" />
 	
 	<!-- Build do aplicativo -->

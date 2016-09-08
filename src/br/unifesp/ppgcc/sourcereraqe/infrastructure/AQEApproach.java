@@ -22,6 +22,7 @@ public class AQEApproach {
 	private boolean filterMethodNameTermsByParameter = true;
 	private String relatedWordsServiceUrl;
 
+	private List<QueryTerm> classNameTerms = new ArrayList<QueryTerm>();
 	private List<QueryTerm> methodNameTerms = new ArrayList<QueryTerm>();
 	private List<QueryTerm> returnTypeTerms = new ArrayList<QueryTerm>();
 	private List<QueryTerm> paramsTerms = new ArrayList<QueryTerm>();
@@ -54,8 +55,13 @@ public class AQEApproach {
 	}
 	
 	public void loadMethodInterface(String methodName, String returnType, String params) throws Exception {
+		this.loadMethodInterface(null, methodName, returnType, params);
+	}
 
-		this.methodNameTerms = this.getMethodNameTerms(methodName);
+	public void loadMethodInterface(String className, String methodName, String returnType, String params) throws Exception {
+
+		this.classNameTerms = this.getNameTerms(methodName);
+		this.methodNameTerms = this.getNameTerms(methodName);
 		this.returnTypeTerms = this.getReturnTypeTerms(returnType);
 		this.paramsTerms = this.getParamsTerms(params);
 
@@ -65,6 +71,12 @@ public class AQEApproach {
 
 		// EAQ
 		for (Expander expander : this.getExpanders()) {
+			if(className != null){
+				if (expander.isClassNameExpander())
+					for(QueryTerm queryTerm : classNameTerms)
+						expander.expandTerm(queryTerm);
+			}
+
 			if (expander.isMethodNameExpander())
 				for(QueryTerm queryTerm : methodNameTerms)
 					expander.expandTerm(queryTerm);
@@ -79,8 +91,8 @@ public class AQEApproach {
 		}
 	}
 
-	List<QueryTerm> getMethodNameTerms(String methodName){
-		String names = JavaTermExtractor.getFQNTermsAsString(methodName);
+	List<QueryTerm> getNameTerms(String name){
+		String names = JavaTermExtractor.getFQNTermsAsString(name);
 
 		//Linha comentada em 28/02/2016
 		//names = JavaTermExtractor.removeDuplicates(names);
@@ -234,5 +246,9 @@ public class AQEApproach {
 
 	public List<QueryTerm> getParamsTerms() {
 		return paramsTerms;
+	}
+
+	public List<QueryTerm> getClassNameTerms() {
+		return classNameTerms;
 	}
 }

@@ -9,6 +9,7 @@ public abstract class Expander {
 	public static final String TYPE_EXPANDER = "Type";
 	
 	private String name;
+	private boolean isClassNameExpander;
 	private boolean isMethodNameExpander;
 	private boolean isParamExpander;
 	private boolean isReturnExpander;
@@ -45,5 +46,13 @@ public abstract class Expander {
 
 	public boolean isReturnExpander() {
 		return isReturnExpander;
+	}
+
+	public boolean isClassNameExpander() {
+		return isClassNameExpander;
+	}
+
+	public void setClassNameExpander(boolean isClassNameExpander) {
+		this.isClassNameExpander = isClassNameExpander;
 	}
 }

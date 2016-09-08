@@ -16,6 +16,7 @@ public class WordNetExpander extends Expander {
 	public WordNetExpander(String relatedWordsServiceUrl) {
 		this.relatedWordsServiceUrl = relatedWordsServiceUrl;
 		super.setName(WORDNET_EXPANDER);
+		super.setClassNameExpander(true);
 		super.setMethodNameExpander(true);
 		super.setParamExpander(false);
 		super.setReturnExpander(false);
